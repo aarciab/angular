@@ -106,3 +106,17 @@ Example:
     - Check version in "node_modules"
     - Check version in "package-lock.json"
     - npm uninstall semver
+
+
+# NPM Scripts
+Reference: https://docs.npmjs.com/cli/v6/using-npm/scripts
+
+- Build-in scripts:
+    + npm test: it will depend on custom configuration
+    + npm start: will find and execute a "server.js" file or customized scripts
+    + npm prestart: executed by default BEFORE "start" script
+    + npm poststart: executed by default AFTER "start" script
+
+
+- Custom scripts:
+    + npm run <script_name>

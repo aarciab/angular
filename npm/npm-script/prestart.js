@@ -1,0 +1,1 @@
+console.log("------ Preparing coffee to start our training ------");

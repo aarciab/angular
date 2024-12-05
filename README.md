@@ -2,6 +2,8 @@
 Angular training
 
 # Installing CLI
+Reference: https://angular.dev/cli/
+
 - npm install -g @angular/cli   #NPM install command
 - ng version    #Check version installed
 

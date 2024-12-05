@@ -4,7 +4,13 @@
   "description": "Soem description here",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "node ./npm-script/prestart.js",
+    "start": "node ./npm-script/start.js",
+    "poststart": "node ./npm-script/poststart.js",
+    "sayHello": "echo \"Message: hello world\"",
+    "sayBye": "echo \"Message: Bye Bye!\"",
+    "talk": "npm run sayHello && npm run sayBye"
   },
   "keywords": [
     "training",
