@@ -46,6 +46,10 @@ Pre-Releases:
     ...
     - 3.2.1
 
+Example: 
+    + npm view <moment> versions
+    + npm view <react> versions
+
 
 # Installing/Uninstalling packages
 - Install dependency (Installation of dependencies is transitive):
@@ -54,7 +58,7 @@ Pre-Releases:
     + npm i <package_name>@<version>
     + npm i <package_name>@latest
 
-    + npm uninstall
+    + npm uninstall <package_name>
 
 
 - Install DEV dependency (Installation of dependencies is NON-transitive):
@@ -93,6 +97,16 @@ Example:
     + npm view babel-cli versions
 
 
+# Dealing with security breaches or deprecated third party libs
+- Remember that (Installation of dependencies is transitive), so there will be some scenarios where few dependencies may have some issues related (security vulnerabilities or deprecated):
+
+Example: 
+    + npm i react-scripts   -> # It will install latest available version, but this contains third party libs with issues:
+    
+        - (npm i css-select) https://github.com/advisories/GHSA-rp65-9cf3-cjxr
+        - (npm i react-scripts) https://github.com/advisories/GHSA-7fh5-64p2-3v2j
+
+    + Fix with "overrides" option (Reference: https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides)
 
 # package.json VS package-lock.json
 - "lock" version is used to maintain a single dependency environment (no changes in dependencies)
@@ -113,10 +127,22 @@ Reference: https://docs.npmjs.com/cli/v6/using-npm/scripts
 
 - Build-in scripts:
     + npm test: it will depend on custom configuration
+
     + npm start: will find and execute a "server.js" file or customized scripts
+        - If a <file>.js is found in the root then default is "<file>.js"
+        - If not, "index.js" file will be use by default
+
     + npm prestart: executed by default BEFORE "start" script
+
     + npm poststart: executed by default AFTER "start" script
 
 
 - Custom scripts:
     + npm run <script_name>
+
+
+
+
+Example: 
+
+    my-project  ->  lib-A  ->  lib-B (vulnerabilidad)

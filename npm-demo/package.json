@@ -1,0 +1,14 @@
+{
+  "name": "npm-demo",
+  "version": "1.0.0",
+  "description": "Description of my project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andres A",
+  "license": "ISC",
+  "dependencies": {
+    "semver": "^7.6.3"
+  }
+}
