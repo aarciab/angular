@@ -1,0 +1,9 @@
+<div class="row rounded bg-body-tertiary">
+    <ul id="store-items" class="overflow-auto mt-3" style="max-height: 400px;">
+        @for (cartItem of cartItems(); track cartItem.id) {
+        <li>
+            <app-cart-item-preview [cartItem]="cartItem"/>
+        </li>
+        }
+    </ul>
+</div>

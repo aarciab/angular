@@ -1,0 +1,19 @@
+<div class="px-3 px-5">
+    <div class="d-flex pt-3">
+        <h3 class="fw-bold text-light">My Store</h3>
+    </div>
+    <hr class="mt-1 mb-3">
+    <div class="row">
+        <div class="col-5">
+            <app-store-item-list (onItemSelected)="onItemSelectedHandler($event)" />
+        </div>
+        <div class="col-7">
+            @if (getSelectedItem) {
+                <app-store-item [item]="getSelectedItem" (onCartItemAdded)="onCartItemAddedHandler($event)"/>
+            }
+            <!-- @else {
+                <h1>SELECT AN ITEM</h1>
+            } -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="card mb-1 mt-1">
+    <div class="card-body">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex flex-row align-items-center">
+                <div>
+                    <img [src]="cartItem().item.thumbnailImageUrl" [alt]="cartItem().item.name" class="img-fluid rounded-3"
+                        alt="Shopping item" style="width: 55px;">
+                </div>
+                <div class="ms-3">
+                    <h6>{{ cartItem().item.name }}</h6>
+                    <p class="small mb-0">{{ cartItem().item.description }}</p>
+                    <p class="small mb-0 fw-bold">{{ getQuantity() }}</p>
+                    <p class="small mb-2">{{ getPrice() }}</p>
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mb-0">{{ getTotalPrice() }}</h5>
+            </div>
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mb-0">REMOVE</h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="card mb-1">
+    <div class="card-body row m-4 d-flex justify-content-start align-items-center">
+        <div class="col-1 p-0">
+            <img [src]="cartItem().item.thumbnailImageUrl" class="img-fluid rounded-3" [alt]="cartItem().item.name">
+        </div>
+        <div class="col-3 p-0">
+            <h6 class="mb-0">{{ cartItem().item.name }}</h6>
+            <h6 class="text-muted">{{ cartItem().item.description }}</h6>
+            <h6 class="text-muted">{{ getQuantity() }}</h6>
+            <h6 class="mb-0">{{ getPrice() }}</h6>
+        </div>
+        <div class="col-2 offset-lg-1 p-0">
+            <h6 class="mb-0">{{ getTotalPrice() }}</h6>
+        </div>
+        <div class="col-1 text-start p-0">
+            <a href="#!" class="text-muted">
+                REMOVE
+            </a>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="row m-4 d-flex justify-content-start align-items-center">
+    <div class="col-1 p-0">
+        <img [src]="cartItem().item.thumbnailImageUrl" class="img-fluid rounded-3" [alt]="cartItem().item.name">
+    </div>
+    <div class="col-3 p-0">
+        <h6 class="mb-0">{{ cartItem().item.name }}</h6>
+        <h6 class="text-muted">{{ cartItem().item.description }}</h6>
+        <h6 class="text-muted">{{ getQuantity() }}</h6>
+        <h6 class="mb-0">{{ getPrice() }}</h6>
+    </div>
+    <div class="col-2 offset-lg-1 p-0">
+        <h6 class="mb-0">{{ getTotalPrice() }}</h6>
+    </div>
+    <div class="col-1 text-start p-0">
+        <a href="#!" class="text-muted">
+             REMOVE
+        </a>
+    </div>
+</div> -->
