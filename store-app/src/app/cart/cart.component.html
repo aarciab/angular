@@ -3,14 +3,17 @@
         <h3 class="fw-bold text-light">My Shopping Cart</h3>
     </div>
     <hr class="mt-1 mb-3">
-    <div class="row">
-        <div class="col-7">
-            @if (cartItems().length > 0) {
-                <app-cart-item-list [cartItems]="cartItems()" />
-            } 
+    
+    @if (cartItems().length > 0) {
+        <div class="row">
+            <div class="col-7">
+                <app-cart-item-list [cartItems]="cartItems()" (onRemoveItem)="onRemoveItem.emit($event)" />
+            </div>
+            <div class="col-5">
+                <app-cart-checkout [cartItems]="cartItems()" (onCheckout)="onCheckout.emit($event)" />
+            </div>
         </div>
-        <div class="col-5">
-            <app-cart-checkout [cartItems]="cartItems()" />
-        </div>
-    </div>
+    }@else {
+        <h1>Cart is empty</h1>
+    }
 </div>

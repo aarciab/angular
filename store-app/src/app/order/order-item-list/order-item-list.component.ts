@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { OrderItemPreviewComponent } from "./order-item-preview/order-item-preview.component";
-import { ORDER_ITEMS } from '../order.model';
+import { OrderItem } from '../order.model';
 
 @Component({
   selector: 'app-order-item-list',
@@ -9,5 +9,6 @@ import { ORDER_ITEMS } from '../order.model';
   styleUrl: './order-item-list.component.css',
 })
 export class OrderItemListComponent {
-  orders = ORDER_ITEMS;
+  orderItems = input<OrderItem[]>([]);
+  onItemSelected = output<OrderItem>();
 }

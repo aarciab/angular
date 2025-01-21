@@ -1,6 +1,9 @@
 <div class="row rounded bg-body-tertiary">
     <ul id="store-items" class="overflow-auto" style="max-height: 400px;">
-        <li><app-order-item-preview /></li>
-        <li><app-order-item-preview /></li>
+        @for (orderItem of orderItems(); track orderItem.id) {
+            <li>
+                <app-order-item-preview [orderItem]="orderItem" (onItemSelected)="onItemSelected.emit($event)"/>
+            </li>
+        }
     </ul>
 </div>

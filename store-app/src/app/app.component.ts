@@ -4,7 +4,7 @@ import { StoreComponent } from './store/store.component';
 import { CartComponent } from "./cart/cart.component";
 import { OrderComponent } from "./order/order.component";
 import { CartItem } from './cart/cart.model';
-import { ORDER_ITEMS, OrderItem } from './order/order.model';
+import { OrderItem } from './order/order.model';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +15,13 @@ import { ORDER_ITEMS, OrderItem } from './order/order.model';
 export class AppComponent {
   title = 'store-app';
   cartItems = signal<CartItem[]>([]);
-  orderItems = signal<OrderItem[]>(ORDER_ITEMS);
+  orderItems = signal<OrderItem[]>([]);
 
   getCartTotalItems = computed(() => this.cartItems().length);
 
-  onOrderItemAdded = (newOrder: OrderItem) => {
+  onCheckoutHandler = (newOrder: OrderItem) => {
     this.orderItems.set([...this.orderItems(), newOrder]);
+    this.cartItems.set([]);
   };
 
   onCartItemAddedHandler = (newItem: CartItem) => {
@@ -34,5 +35,10 @@ export class AppComponent {
     } else {
       this.cartItems.set([...this.cartItems(), newItem]);
     }
+  };
+
+  onCartItemRemovedHandler = (id: number) => {
+    const items = this.cartItems().filter((item) => id !== item.id);
+    this.cartItems.set(items);
   };
 }

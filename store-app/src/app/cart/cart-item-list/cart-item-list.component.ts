@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CartItemPreviewComponent } from "./cart-item-preview/cart-item-preview.component";
 import { CartItem } from '../cart.model';
 
@@ -6,10 +6,9 @@ import { CartItem } from '../cart.model';
   selector: 'app-cart-item-list',
   imports: [CartItemPreviewComponent],
   templateUrl: './cart-item-list.component.html',
-  styleUrl: './cart-item-list.component.css'
+  styleUrl: './cart-item-list.component.css',
 })
 export class CartItemListComponent {
-
   cartItems = input<CartItem[]>([]);
-
+  onRemoveItem = output<number>();
 }

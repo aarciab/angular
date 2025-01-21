@@ -1,5 +1,6 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, input, computed, output } from '@angular/core';
 import { CartItem } from '../cart.model';
+import { OrderItem } from '../../order/order.model';
 
 @Component({
   selector: 'app-cart-checkout',
@@ -9,11 +10,15 @@ import { CartItem } from '../cart.model';
 })
 export class CartCheckoutComponent {
   cartItems = input<CartItem[]>([]);
+  onCheckout = output<OrderItem>();
 
   getTotalItems = computed(() => this.cartItems().length);
-  getSubTotal = computed(() => `$${this.calculateSubTotal().toFixed(2)}`);
-  getShippingCost = computed(() => `$${this.calculateShippingCost().toFixed(2)}`);
-  getTotal = computed(() => `$${(this.calculateSubTotal() + this.calculateShippingCost()).toFixed(2)}`);
+  getSubTotalLabel = computed(() => `$${this.getSubTotalCost().toFixed(2)}`);
+  getSubTotalCost = computed(() => this.calculateSubTotal());
+  getShippingLabel = computed(() => `$${this.getShippingCost().toFixed(2)}`);
+  getShippingCost = computed(() => this.calculateShippingCost());
+  getTotalLabel = computed(() => `$${this.getTotalCost().toFixed(2)}`);
+  getTotalCost = computed(() => this.getSubTotalCost() + this.getShippingCost());
 
   calculateShippingCost = () => {
     if (this.getTotalItems() === 0) {
@@ -27,6 +32,19 @@ export class CartCheckoutComponent {
     }
   };
 
-  calculateSubTotal = () => this.cartItems().reduce((acc, item) => acc + item.total, 0);
+  calculateSubTotal = () =>
+    this.cartItems().reduce((acc, item) => acc + item.total, 0);
+
+  onCheckoutHandler = () => {
+    this.onCheckout.emit({
+      date: new Date(),
+      id: new Date().toISOString(),
+      invoice: new Date().toISOString(),
+      items: this.cartItems(),
+      shipping: this.getShippingCost(),
+      subTotal: this.getSubTotalCost(),
+      total: this.getTotalCost(),
+    });
+  };
 }
 

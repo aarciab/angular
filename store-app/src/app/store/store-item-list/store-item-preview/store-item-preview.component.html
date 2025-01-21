@@ -6,7 +6,7 @@
                     <img [src]="item().thumbnailImageUrl" [alt]="item().name" class="img-fluid rounded-3" alt="Shopping item" style="width: 55px;">
                 </div>
                 <div class="ms-3">
-                    <h5>{{ item().name }}</h5>
+                    <h5>{{ item().name | firstLetterCasePipe:'UPPER' }}</h5>
                     <p class="small mb-0">{{ item().description }}</p>
                 </div>
             </div>

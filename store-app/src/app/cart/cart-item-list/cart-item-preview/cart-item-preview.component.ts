@@ -1,4 +1,4 @@
-import { Component, computed, input, signal } from '@angular/core';
+import { Component, computed, input, output, signal } from '@angular/core';
 import { CartItem } from '../../cart.model';
 
 @Component({
@@ -9,8 +9,9 @@ import { CartItem } from '../../cart.model';
 })
 export class CartItemPreviewComponent {
   cartItem = input.required<CartItem>();
+  onRemoveItem = output<number>();
 
-  getQuantity = computed(() =>`Quantity: ${this.cartItem().quantity}`);
+  getQuantity = computed(() => `Quantity: ${this.cartItem().quantity}`);
   getPrice = computed(
     () =>
       `$${
@@ -32,4 +33,8 @@ export class CartItemPreviewComponent {
           : ' -- '
       }`
   );
+
+  removeOnClickHandler = () => {
+    this.onRemoveItem.emit(this.cartItem().id);
+  };
 }
