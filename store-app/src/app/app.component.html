@@ -1,4 +1,4 @@
 <app-header [cartTotalItems]="getCartTotalItems()"></app-header>
 <app-store (onCartItemAdded)="onCartItemAddedHandler($event)"/>
 <app-cart [cartItems]="cartItems()" (onRemoveItem)="onCartItemRemovedHandler($event)" (onCheckout)="onCheckoutHandler($event)"/>
-<app-order [orderItems]="orderItems()"/>¡
+<app-order [orderItems]="orderItems()"/>

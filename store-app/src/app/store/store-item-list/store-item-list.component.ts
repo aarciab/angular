@@ -11,6 +11,7 @@ import { StoreService } from '../store.service';
   styleUrl: './store-item-list.component.css',
 })
 export class StoreItemListComponent implements OnInit {
+  
   constructor(private storeService: StoreService) {}
 
   storeItems = signal<StoreItem[]>([]);

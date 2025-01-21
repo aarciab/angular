@@ -9,7 +9,6 @@ export class FirstLetterCasePipePipe implements PipeTransform {
     const i = value.charAt(0);
     const iTrasnformed = args === 'UPPER' ? i.toUpperCase() : i.toLowerCase(); 
     return iTrasnformed + value.slice(1);
-
   }
 
 }

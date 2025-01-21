@@ -35,6 +35,7 @@ export class StoreItemComponent
   // LifeCycle Hooks.........................................
   ngOnChanges(changes: SimpleChanges): void {
     console.log(`ngOnChanges: ${JSON.stringify(changes)}`);
+    //Go to API, bring data, and render
   }
 
   async ngOnInit(): Promise<void> {
