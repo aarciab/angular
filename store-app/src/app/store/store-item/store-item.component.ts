@@ -1,10 +1,12 @@
 import { Component, input, output, computed, signal, OnChanges, SimpleChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { StoreItem } from '../store.model';
 import { CartItem } from '../../cart/cart.model';
+import { StoreService } from '../store.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-store-item',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './store-item.component.html',
   styleUrl: './store-item.component.css',
 })
@@ -19,20 +21,15 @@ export class StoreItemComponent
     AfterViewChecked,
     OnDestroy
 {
-
-  constructor() {
+  constructor(private storeService: StoreService) {
     console.log(`constructor: executed`);
   }
-  
-  item = input.required<StoreItem>();
+
+  id = input.required<number>();
   onCartItemAdded = output<CartItem>();
+  item = signal<StoreItem | undefined>(undefined);
 
   quantity = signal(0);
-
-  getPrice = computed(() => `$${this.item().price.toFixed(2)}`);
-  getTotalPrice = computed(
-    () => `$${(this.item().price * this.quantity()).toFixed(2)}`
-  );
   isAddToCartDisabled = computed(() => this.quantity() === 0);
 
   // LifeCycle Hooks.........................................
@@ -40,8 +37,15 @@ export class StoreItemComponent
     console.log(`ngOnChanges: ${JSON.stringify(changes)}`);
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     console.log(`ngOnInit: executed`);
+
+    if (this.id()) {
+      console.log("Fecthing...")
+      const item = await this.storeService.getItemById(this.id());
+      this.item.set(item);
+      console.log('Fecthing item ', JSON.stringify(item));
+    }
   }
 
   ngDoCheck(): void {
@@ -79,12 +83,12 @@ export class StoreItemComponent
     }
   };
 
-  onAddToCartClick = () => {
+  onAddToCartClick = (item: StoreItem) => {
     this.onCartItemAdded.emit({
-      id: this.item().id,
-      item: this.item(),
+      id: item.id,
+      item: item,
       quantity: this.quantity(),
-      total: this.item().price * this.quantity(),
+      total: item.price * this.quantity(),
     });
 
     this.quantity.set(0);

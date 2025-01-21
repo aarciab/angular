@@ -12,11 +12,11 @@ export class StoreItemPreviewComponent {
   item = input.required<StoreItem>({
     alias: 'storeItem',
   });
-  onItemSelected = output<StoreItem>();
+  onItemSelected = output<number>();
 
   getPrice = computed(() => `$${this.item().price.toFixed(2)}`);
 
   itemOnClickHandler = () => {
-    this.onItemSelected.emit(this.item());
+    this.onItemSelected.emit(this.item().id);
   };
 }

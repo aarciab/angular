@@ -8,8 +8,8 @@
             <app-store-item-list (onItemSelected)="onItemSelectedHandler($event)" />
         </div>
         <div class="col-7">
-            @if (getSelectedItem) {
-                <app-store-item [item]="getSelectedItem" (onCartItemAdded)="onCartItemAddedHandler($event)"/>
+            @if (getSelectedId) {
+                <app-store-item [id]="getSelectedId" (onCartItemAdded)="onCartItemAddedHandler($event)"/>
             }
         </div>
     </div>

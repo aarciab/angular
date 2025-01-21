@@ -1,50 +1,54 @@
 <div class="row mb-4 ms-2 py-4 px-3 border rounded align-items-center bg-body-tertiary">
     <div class="row">
-        <div class="col-md-3">
-            <img [src]="item().imageUrl" [alt]="item().name" class="img-fluid rounded product-image" id="mainImage">
-        </div>
-
-        <div class="col-md-9">
-            <div class="row align-items-start">
-                <div class="col-12">
-                    <div>
-                        <h3 class="fw-bold mt-2 pt-1">{{ item().name }}</h3>
-                        <p class="mb-4">{{ item().description }}</p>
-
-                        <hr class="my-4">
-
-                        <div class="d-flex justify-content-between">
-                            <h5 class="text-uppercase">Unit Price</h5>
-                            <h5>{{ getPrice() }}</h5>
+        @if (item(); as storeItem) {
+            <div class="col-md-3">
+                <img [src]="storeItem.imageUrl" [alt]="storeItem.name" class="img-fluid rounded product-image" id="mainImage">
+            </div>
+            
+            <div class="col-md-9">
+                <div class="row align-items-start">
+                    <div class="col-12">
+                        <div>
+                            <h3 class="fw-bold mt-2 pt-1">{{ storeItem.name }}</h3>
+                            <p class="mb-4">{{ storeItem.description }}</p>
+            
+                            <hr class="my-4">
+            
+                            <div class="d-flex justify-content-between">
+                                <h5 class="text-uppercase">Unit Price</h5>
+                                <h5>{{ storeItem.price | currency }}</h5>
+                            </div>
+            
+                            <label for="quantity" class="form-label">Quantity:</label>
+                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex p-0">
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn px-2"
+                                    (click)="onSubtractQuantityHandler()">
+                                    -
+                                </button>
+            
+                                <input id="form1" min="0" name="quantity" [value]="quantity()" type="number"
+                                    class="form-control form-control-sm" />
+            
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn px-2" (click)="onAddQuantityHandler()">
+                                    +
+                                </button>
+                            </div>
+            
+                            <hr class="my-4">
+            
+                            <div class="d-flex justify-content-between mb-5">
+                                <h5 class="text-uppercase">Total</h5>
+                                <h5>{{ (storeItem.price * quantity()) | currency }}</h5>
+                            </div>
+            
+                            <button type="button" class="btn btn-primary btn-block btn-md" (click)="onAddToCartClick(storeItem)"
+                                [disabled]="isAddToCartDisabled()">ADD TO CART</button>
                         </div>
-
-                        <label for="quantity" class="form-label">Quantity:</label>
-                        <div class="col-md-3 col-lg-3 col-xl-2 d-flex p-0">
-                            <button data-mdb-button-init data-mdb-ripple-init class="btn px-2"
-                                (click)="onSubtractQuantityHandler()">
-                                -
-                            </button>
-
-                            <input id="form1" min="0" name="quantity" [value]="quantity()" type="number"
-                                class="form-control form-control-sm" />
-
-                            <button data-mdb-button-init data-mdb-ripple-init class="btn px-2"
-                                (click)="onAddQuantityHandler()">
-                                +
-                            </button>
-                        </div>
-
-                        <hr class="my-4">
-
-                        <div class="d-flex justify-content-between mb-5">
-                            <h5 class="text-uppercase">Total</h5>
-                            <h5>{{ getTotalPrice() }}</h5>
-                        </div>
-
-                        <button type="button" class="btn btn-primary btn-block btn-md" (click)="onAddToCartClick()" [disabled]="isAddToCartDisabled()">ADD TO CART</button>
                     </div>
                 </div>
             </div>
-        </div>
+        } @else {
+            <h3>Loading item ...</h3>
+        }
     </div>
 </div>

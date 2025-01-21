@@ -11,20 +11,19 @@ import { CartItem } from '../cart/cart.model';
   styleUrl: './store.component.css',
 })
 export class StoreComponent {
-  
-  selectedItem: StoreItem | undefined = undefined;
+  selectedId: number | undefined = undefined;
   onCartItemAdded = output<CartItem>();
 
-  get getSelectedItem() {
-    return this.selectedItem || undefined;
+  get getSelectedId(): number | undefined {
+    return this.selectedId || undefined;
   }
 
-  onItemSelectedHandler = (item: StoreItem) => {
-    this.selectedItem = item;
+  onItemSelectedHandler = (id: number) => {
+    this.selectedId = id;
   };
 
   onCartItemAddedHandler = (newItem: CartItem) => {
     this.onCartItemAdded.emit(newItem);
-    this.selectedItem = undefined;
+    this.selectedId = undefined;
   };
 }

@@ -38,8 +38,8 @@ export class CartCheckoutComponent {
   onCheckoutHandler = () => {
     this.onCheckout.emit({
       date: new Date(),
-      id: new Date().toISOString(),
-      invoice: new Date().toISOString(),
+      id: `${new Date().getFullYear()}-${Math.floor(Math.random() * 1000000)}`,
+      invoice: `${Math.floor(Math.random() * 100000000)}`,
       items: this.cartItems(),
       shipping: this.getShippingCost(),
       subTotal: this.getSubTotalCost(),
