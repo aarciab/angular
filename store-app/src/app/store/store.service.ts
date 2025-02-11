@@ -8,7 +8,9 @@ export class StoreService {
   constructor() {}
 
   public async getItems(): Promise<StoreItem[]> {
-    return STORE_ITEMS_SORTED;
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(STORE_ITEMS_SORTED), 3000)
+    );
   }
 
   public async getItemById(id: number): Promise<StoreItem | undefined> {

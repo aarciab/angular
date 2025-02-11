@@ -1,16 +1,23 @@
 <div class="px-3 px-5">
     <div class="d-flex pt-3">
-        <h3 class="fw-bold text-light">My Store</h3>
+        <h3 class="fw-bold text-light">My Products</h3>
     </div>
     <hr class="mt-1 mb-3">
     <div class="row">
-        <div class="col-5">
-            <app-store-item-list (onItemSelected)="onItemSelectedHandler($event)" />
-        </div>
-        <div class="col-7">
-            @if (getSelectedId) {
-                <app-store-item [id]="getSelectedId" (onCartItemAdded)="onCartItemAddedHandler($event)"/>
-            }
-        </div>
+        @if (isLoading$ | async) {
+            <div class="text-center">
+                <div class="spinner-border" role="status">
+                </div>
+            </div>
+        } @else {
+            <div class="col-5">
+                <app-store-item-list (onItemSelected)="onItemSelectedHandler($event)" />
+            </div>
+            <div class="col-7">
+                @if (getSelectedId) {
+                <app-store-item [id]="getSelectedId" (onCartItemAdded)="onCartItemAddedHandler($event)" />
+                }
+            </div>
+        }
     </div>
 </div>
